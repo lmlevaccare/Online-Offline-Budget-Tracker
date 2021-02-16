@@ -6,5 +6,3 @@ When brought back online,offline entries should be added to tracker.
 
 The functionality utilized in this PWA application includes Compression, IndexedDB, webpack, cache API, and Service Workers to provide an offline experience for the application.
 
-
-(public/icons/budgetapp.png?raw=true "Title")
