@@ -1,9 +1,8 @@
 const router = require("express").Router();
-const dbTransaction = require("../models/transaction.js");
+const Alltrans = require("../models/transaction.js");
 
-// post routes to add transactions to budget tracker
 router.post("/api/transaction", ({body}, res) => {
-  dbTransaction.create(body)
+  Alltrans.create(body)
     .then(dbTransaction => {
       res.json(dbTransaction);
     })
@@ -11,3 +10,25 @@ router.post("/api/transaction", ({body}, res) => {
       res.status(404).json(err);
     });
 });
+
+router.post("/api/transaction/bulk", ({body}, res) => {
+  Alltrans.insertMany(body)
+    .then(dbTransaction => {
+      res.json(dbTransaction);
+    })
+    .catch(err => {
+      res.status(404).json(err);
+    });
+});
+
+router.get("/api/transaction", (req, res) => {
+  Alltrans.find({}).sort({date: -1})
+    .then(dbTransaction => {
+      res.json(dbTransaction);
+    })
+    .catch(err => {
+      res.status(404).json(err);
+    });
+});
+
+module.exports = router;
