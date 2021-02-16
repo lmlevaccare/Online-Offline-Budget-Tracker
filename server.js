@@ -9,18 +9,20 @@ const app = express();
 
 app.use(logger("dev"));
 
+// install Node.js compression middleware.
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
 
+// mongo.db connection installed
 mongoose.connect("mongodb://localhost/budget", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
 
-// routes
+// install api routes
 app.use(require("./routes/api.js"));
 
 app.listen(PORT, () => {
